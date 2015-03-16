@@ -1,1 +1,1 @@
-# SQLServerPerformanceTraining
+# SQL Server Performance Training Scripts
