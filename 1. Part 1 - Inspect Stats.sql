@@ -2,6 +2,7 @@ use credit
 
 go 
 -- check statistics on dbo.charge table
+-- only has stats on the indexes
 select 
 	s.object_id, s.name, s.auto_created,
 	COL_NAME(s.object_id, sc.column_id) as col_name
@@ -10,7 +11,7 @@ join sys.stats_columns as sc on s.stats_id = sc.stats_id and s.object_id = sc.ob
 where s.object_id = object_id('dbo.charge')
 
 GO
--- predicate referencing charge_dt
+-- predicate referencing charge_dt, no statistics on charge_dt yet but auto creation is on
 
 select charge_no
 from dbo.charge as c
@@ -30,6 +31,7 @@ GO
 
 DBCC SHOW_STATISTICS(N'dbo.charge', _WA_Sys_00000005_0DAF0CB0)
 WITH STAT_HEADER;
+
 GO
 
 USE [master]
